@@ -1,7 +1,7 @@
 import { Optional } from '@nestjs/common';
 import { IsOptional, IsString, Matches, MaxLength, MinLength } from 'class-validator';
 
-export class CreateDoctorDto {
+export class CreatePatientDto {
   @IsString()
   @MinLength(2)
   @MaxLength(20)
@@ -16,7 +16,6 @@ export class CreateDoctorDto {
   @MinLength(2)
   @MaxLength(20)
   email: string;
-
 
   @IsString()
   @MaxLength(20)

@@ -8,23 +8,23 @@ import { MblModule } from './mbl/mbl.module';
 import { SpecialityModule } from './speciality/speciality.module';
 import { LanguageModule } from './language/language.module';
 
+
 @Module({
   imports: [
     CacheModule.register({isGlobal: true}),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: '127.0.0.1',
       port: 3306,
       username: 'root',
       password: 'testtest',
-      database: 'doctorApp',
+      database: 'knockdoc',
       synchronize: true,
       autoLoadEntities: true,
     }),
     DoctorModule,
     EducationModule,
     CertificationModule,
-    AwardModule,
     MblModule,
     SpecialityModule,
     LanguageModule

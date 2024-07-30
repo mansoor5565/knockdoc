@@ -1,42 +1,38 @@
 import { Body, Controller, Get, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
-import { DoctorService } from './doctor.service';
-import { CreateDoctorDto } from './dto/create-doctor.dto';
-import { CreateDoctorDto2 } from './dto/create-doctor2.dto';
-import { CreateDoctorDto3 } from './dto/create-doctor3.dto';
-import { CreateDoctorDto4 } from './dto/create-doctor4.dto';
-
-
-import { LoginDoctorDto } from './dto/login-doctor.dto';
-// import { DishesService } from '../dishes/dishes.service';
+import { PatientService } from './patient.service';
+import { CreatePatientDto } from './dto/create-patient.dto';
+import { CreatePatientDto2 } from './dto/create-patient2.dto';
+import { CreatePatientDto3 } from './dto/create-patient3.dto';
+import { LoginPatientDto } from './dto/login-patient.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { UpdatePasswordDto } from './dto/update-password.dto';
 import { UpdateVerifiedPasswordDto } from './dto/update-verified-password.dto';
 import { ForgetPasswordDto } from './dto/forget-password.dto';
 import { UpdateprofilePasswordDto } from './dto/update-profile-password.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserDto } from './dto/update-patient.dto';
 // import { PaginationDto } from '../dishes/dto/pagination.dto';
 
 
 
-@Controller('doctor')
-export class DoctorsController {
-    constructor(private readonly doctorService: DoctorService) { }
+@Controller('patient')
+export class PatientsController {
+    constructor(private readonly patientService: PatientService) { }
 
     //private readonly dishesService: DishesService
 
-    //Doctor account creation API
+    //Patient account creation API
     @Post('/signup')
-    async createDoctor(@Body() createDoctorDto: CreateDoctorDto): Promise<any> {
-        const { accessToken } = await this.doctorService.createDoctor(createDoctorDto);
+    async createPatient(@Body() createPatientDto: CreatePatientDto): Promise<any> {
+        const { accessToken } = await this.patientService.createPatient(createPatientDto);
         const response = { accessToken, message: 'Your account has been created successfully', status: true };
         return response;
     }
 
     @UseGuards(AuthGuard())
     @Post('/signup2')
-    async createDoctor2(@Body() createDoctorDto2: CreateDoctorDto2,@Req() req): Promise<any> {
+    async createPatient2(@Body() createPatientDto2: CreatePatientDto2,@Req() req): Promise<any> {
         const userId = req.user.id; 
-         await this.doctorService.createDoctor2(createDoctorDto2,userId);
+         await this.patientService.createPatient2(createPatientDto2,userId);
         const response = { message: 'Your account has been updated successfully', status: true };
         return response;
     }
@@ -44,29 +40,18 @@ export class DoctorsController {
 
     @UseGuards(AuthGuard())
     @Post('/signup3')
-    async createDoctor3(@Body() createDoctorDto3: CreateDoctorDto3,@Req() req): Promise<any> {
+    async createPatient3(@Body() createPatientDto3: CreatePatientDto3,@Req() req): Promise<any> {
         const userId = req.user.id; 
-        await this.doctorService.createDoctor3(createDoctorDto3,userId);
+        await this.patientService.createPatient3(createPatientDto3,userId);
         const response = { message: 'Your account has been updated successfully', status: true };
         return response;
     }
-
-
-    @UseGuards(AuthGuard())
-    @Post('/signup4')
-    async createDoctor4(@Body() createDoctorDto4: CreateDoctorDto4,@Req() req): Promise<any> {
-        const userId = req.user.id; 
-        await this.doctorService.createDoctor4(createDoctorDto4,userId);
-        const response = { message: 'Your account has been updated successfully', status: true };
-        return response;
-    }
-
 
 
 
     @Get('/list')
     async list(): Promise<any> {
-        const data = await this.doctorService.list();
+        const data = await this.patientService.list();
         const response = { data,message: 'Fetched successfully', status: true };
         return response;
     }
@@ -79,7 +64,7 @@ export class DoctorsController {
     ): Promise<any> {
       const email = forgetPasswordDto.email;
   
-      const data = await this.doctorService.forgetPassword(email);
+      const data = await this.patientService.forgetPassword(email);
       if (data) {
         return {
           message: "Please check your email for password reset",
@@ -98,7 +83,7 @@ export class DoctorsController {
     ): Promise<any> {
       const email = updatePasswordDto.email;
   
-      const data = await this.doctorService.verifyPassword(
+      const data = await this.patientService.verifyPassword(
         email,
         updatePasswordDto
       );
@@ -115,7 +100,7 @@ export class DoctorsController {
     async updateVerifiedPassword(
       @Body() updateVerifiedPasswordDto: UpdateVerifiedPasswordDto
     ): Promise<Object> {
-      const data = await this.doctorService.updateVerifiedPassword(
+      const data = await this.patientService.updateVerifiedPassword(
         updateVerifiedPasswordDto
       );
       if (data) {
@@ -140,7 +125,7 @@ export class DoctorsController {
       @Req() req
     ): Promise<Object> {
       const userId = req.user.id;
-      const data = await this.doctorService.updateProfilePassword(
+      const data = await this.patientService.updateProfilePassword(
         userId,
         updateUserDto
       );
@@ -168,7 +153,7 @@ export class DoctorsController {
       @Req() req
     ): Promise<any> {
       const userId = req.user.id;
-      const { accessToken } = await this.doctorService.updateUser(
+      const { accessToken } = await this.patientService.updateUser(
         updateUserDto,
         userId
       );
@@ -182,10 +167,10 @@ export class DoctorsController {
 
 
 
-    //Doctor login API
+    //Patient login API
     @Post('/signin')
-    async signIn(@Body() loginDoctorDto: LoginDoctorDto): Promise<any> {
-        const { accessToken } = await this.doctorService.signIn(loginDoctorDto);
+    async signIn(@Body() loginPatientDto: LoginPatientDto): Promise<any> {
+        const { accessToken } = await this.patientService.signIn(loginPatientDto);
         const response = { accessToken, message: 'Signin successfully', status: true };
         return response;
     }

@@ -33,14 +33,11 @@ export class MblService {
     const mbl: Mbl = new Mbl();
 
     mbl.country = createMblDto.country;
-    mbl.stateLisence = createMblDto.stateLisence;
-    mbl.lisenceNumber = createMblDto.lisenceNumber;
+    mbl.state = createMblDto.stateLisence;
+    mbl.number = createMblDto.lisenceNumber;
     mbl.npiNumber = createMblDto.npiNumber;
-    mbl.date = createMblDto.date;
+   // mbl.date = createMblDto.date;
     mbl.certificateImage = createMblDto.certificateImage;
-
-
-
   
     const doctor = await this.doctorRepository.findOneBy({ id: userId });
     mbl.doctor = doctor;

@@ -8,19 +8,16 @@ export class Education {
   id: string;
 
   @Column()
-  medicalSchool: string;
+  schoolName: string;
 
   @Column()
   educated: string;
 
-
   @Column()
   degree: string;
 
-
   @Column()
   year: string;
-
 
   @ManyToOne(() => Doctor, (doctor) => doctor.educations)
   doctor: Doctor

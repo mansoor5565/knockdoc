@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { DoctorsController } from './doctor.controller';
-import { DoctorService } from './doctor.service';
+import { PatientsController } from './patient.controller';
+import { PatientService } from './patient.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Doctor } from './doctor.entity';
+import { Patient } from './patient.entity';
 import { JwtStrategy } from '../jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
@@ -23,10 +23,10 @@ import { CertificationModule } from 'src/certification/certification.module';
       secret: 'yourSecretKey', // Replace with your own secret key
       signOptions: { expiresIn: '1000h' }, // Token expiration time
     }),
-    TypeOrmModule.forFeature([Doctor,Language,Certification,Award,Education,Mbl ])],
-  controllers: [DoctorsController],
-  providers: [DoctorService,LanguageService, JwtStrategy]
+    TypeOrmModule.forFeature([Patient,Language,Certification,Award,Education,Mbl ])],
+  controllers: [PatientsController],
+  providers: [PatientService,LanguageService, JwtStrategy]
 })
 
 //DishesService
-export class DoctorModule { }
+export class PatientModule { }

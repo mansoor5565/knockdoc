@@ -10,6 +10,9 @@ import { EducationController } from './education.controller';
 import { Doctor } from 'src/doctor/doctor.entity';
 import { DoctorService } from 'src/doctor/doctor.service';
 import { Language } from 'src/language/language.entity';
+import { DoctorModule } from 'src/doctor/doctor.module';
+import { Mbl } from 'src/mbl/mbl.entity';
+import { Certification } from 'src/certification/certification.entity';
 
 
 @Module({
@@ -19,7 +22,7 @@ import { Language } from 'src/language/language.entity';
       secret: 'yourSecretKey', // Replace with your own secret key
       signOptions: { expiresIn: '300h' }, // Token expiration time
     }),
-    TypeOrmModule.forFeature([Education,Doctor, Language ])],
+    TypeOrmModule.forFeature([Education,Doctor, Language,Mbl,Certification ])],
     //Dish
   controllers: [EducationController],
   providers: [EducationService,DoctorService, JwtStrategy]

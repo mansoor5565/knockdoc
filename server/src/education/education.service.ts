@@ -32,7 +32,7 @@ export class EducationService {
   ): Promise<Education> {
     const education: Education = new Education();
 
-    education.medicalSchool = createEducationDto.medicalSchool;
+    education.schoolName = createEducationDto.medicalSchool;
     education.educated = createEducationDto.educated;
     education.degree = createEducationDto.degree;
     education.year = createEducationDto.year;

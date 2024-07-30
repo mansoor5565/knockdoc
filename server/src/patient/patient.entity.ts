@@ -16,7 +16,7 @@ import {
 //import { Dish } from '../dishes/dish.entity';
 
 @Entity()
-export class Doctor {
+export class Patient {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -32,9 +32,6 @@ export class Doctor {
   @Column({ default: null })
   phoneNumber: string;
 
-  @Column({ default: null })
-  npiNumber: string;
-
   @Column()
   email: string;
 
@@ -44,102 +41,86 @@ export class Doctor {
   @Column({ default: null })
   image: string;
 
+  @Column({ default: null })
+  dob: Date;
+
+  @Column({ default: null })
+  gender: 15;
+
+  @Column({ default: null })
+  race: 15;
+
+  @Column({ default: null })
+  mail_address: 500;
+
+  @Column({ default: null })
+  mail_city: 500;
+
+  @Column({ default: null })
+  mail_state: 500;
+
+  @Column({ default: null })
+  mail_zip: 500;
+
+  @Column({ default: null })
+  mail_street: 500;
+
+  @Column({ default: null })
+  mail_suite: 500;
+
+
+  @Column({ default: null })
+  work_address: 500;
+
+  @Column({ default: null })
+  work_city: 500;
+
+  @Column({ default: null })
+  work_state: 500;
+
+  @Column({ default: null })
+  work_zip: 500;
+
+  @Column({ default: null })
+  work_street: 500;
+
+  @Column({ default: null })
+  work_suite: 500;
+
+
+  @Column({ default: null })
+  home_address: 500;
+
+  @Column({ default: null })
+  home_city: 500;
+
+  @Column({ default: null })
+  home_state: 500;
+
+  @Column({ default: null })
+  home_zip: 500;
+
+  @Column({ default: null })
+  home_street: 500;
+
+  @Column({ default: null })
+  home_suite: 500;
 
   @Column({ default: null })
   drivingLicense: string;
 
-  @Column({ default: null })
-  title: string;
 
   @Column({ default: null })
-  insurancePlan: string;
+  preferred_age: string;
 
-  @OneToMany(() => Education, (education) => education.doctor)
-  educations: Education[];
-
-
-  @OneToMany(() => Certification, (certification) => certification.doctor)
-  certifications: Certification[];
-
-
-  @OneToMany(() => Award, (award) => award.doctor)
-  awards: Award[];
-
-
-  @OneToMany(() => Mbl, (mbl) => mbl.doctor)
-  mbls: Mbl;
+  @Column({ default: null })
+  preferred_gender: string;
   
-
-
-  @ManyToMany(() => Language, language => language.doctors)
-  @JoinTable()
-  languages: Language[];
-
-
-  // @OneToMany(() => Language, (language) => language.doctor)
-  // languages: Language[];
-
-  // @OneToMany(() => AcceptedInsurancePlan,
-  //   (acceptedInsurancePlan) => acceptedInsurancePlan.doctor
-  // )
-  // acceptedInsurancePlans: AcceptedInsurancePlan[];
+  @Column({ default: null })
+  preferred_insurance: string;
 
   @Column({ default: null })
-  insuranceIdAttachment: string;
-
-  @Column({ default: null })
-  boardCertified: string;
-
-  @Column({ default: null })
-  suffix: string;
-
-  @Column({ default: null })
-  basicEducation: string;
-
-  @Column({ default: null })
-  age: string;
-
-  @Column({ default: null })
-  drivingLicenseAttachment: string;
-
-  @Column({ default: null })
-  hospitalAffiliate: string;
-
-  @Column({ default: null })
-  hospitalName: string;
-
-  @Column({ default: null })
-  facultyAppoinment: string;
-
-  @Column({ default: null })
-  facultyAppoinmentTitle: string;
-
-  @Column({ default: null })
-  providerOfficeLocation: string;
-
-  @Column({ default: null })
-  providerZip: string;
-
-  @Column({ default: null })
-  providerStreet: string;
-
-  @Column({ default: null })
-  providerCity: string;
-
-  @Column({ default: null })
-  website: string;
-
-  @Column({ default: null })
-  officeHours: string;
-
-  @Column({ default: null })
-  officeDays: string;
-
-  @Column({ default: null })
-  providerSuite: string;
-
-  @Column({ default: null })
-  providerState: string;
+  allergy: string;
 
   @Column({ default: null })
   verificationCode: string;

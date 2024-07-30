@@ -11,18 +11,19 @@ export class Mbl {
   country: string;
 
   @Column()
-  stateLisence: string;
+  state: string;
 
   @Column()
-  lisenceNumber: string;
+  number: string;
 
   @Column()
   npiNumber: string;
 
   @Column()
-  date: string;
+  expiration: string;
 
-  @Column()
+
+  @Column({ default: null })
   certificateImage: string;
 
   @ManyToOne(() => Doctor, (doctor) => doctor.mbls)
