@@ -56,6 +56,8 @@ export class DoctorService {
   async createDoctor(
     createDoctorDto: CreateDoctorDto
   ): Promise<{ accessToken: string }> {
+
+
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(createDoctorDto.password, salt);
     const doctor: Doctor = new Doctor();
@@ -175,8 +177,9 @@ export class DoctorService {
     const doctor = await this.doctorRepository.findOneBy({ id });
 
 
+    if(createDoctorDto4.certifications){
 
-    await this.certificationRepository.delete({ doctor });
+      await this.certificationRepository.delete({ doctor });
     createDoctorDto4.certifications.forEach(arr=>{
       const certification: Certification = new Certification();
       certification.certificateName = arr.certificateName;
@@ -186,6 +189,8 @@ export class DoctorService {
       this.certificationRepository.save(certification);
     })
 
+    }
+    
 
     await this.educationRepository.delete({ doctor });
     createDoctorDto4.education.forEach(arr=>{

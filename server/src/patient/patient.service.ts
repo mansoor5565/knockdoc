@@ -20,7 +20,6 @@ import { UpdateVerifiedPasswordDto } from "./dto/update-verified-password.dto";
 import { UpdateprofilePasswordDto } from "./dto/update-profile-password.dto";
 import { CreatePatientDto2 } from "./dto/create-patient2.dto";
 import { CreatePatientDto3 } from "./dto/create-patient3.dto";
-import { CreatePatientDto4 } from "./dto/create-patient4.dto";
 import { Certification } from "src/certification/certification.entity";
 import { Education } from "src/education/education.entity";
 import { Mbl } from "src/mbl/mbl.entity";
@@ -100,19 +99,27 @@ export class PatientService {
 
 
   async createPatient2(
-    createPatientDto2: CreatePatientDto2, id:string
+    createPatient2: CreatePatientDto2, id:string
   ): Promise<boolean> {
     
     const patient = await this.patientRepository.findOneBy({ id });
     
-    patient.npiNumber = createPatientDto2.npiNumber;
-    patient.drivingLicense = createPatientDto2.drivingLicense;
-    patient.age = createPatientDto2.age;
-    patient.basicEducation = createPatientDto2.education;
-    patient.suffix = createPatientDto2.suffix;
-    patient.boardCertified = createPatientDto2.boardCertified;
-    patient.hospitalAffiliate = createPatientDto2.hospitalAffiliate;
-    patient.hospitalName = createPatientDto2.hospitalName;
+      patient.dob = createPatient2.dob;
+      patient.gender = createPatient2.gender;
+      patient.race = createPatient2.race;
+      patient.mail_address = createPatient2.mail_address;
+      patient.mail_city = createPatient2.mail_city;
+      patient.mail_state = createPatient2.mail_state;
+      patient.mail_zip = createPatient2.mail_zip;
+      patient.mail_street = createPatient2.mail_street;
+      patient.mail_suite = createPatient2.mail_suite;
+      patient.work_address = createPatient2.work_address;
+      patient.work_city = createPatient2.work_city;
+      patient.work_state = createPatient2.work_state;
+      patient.work_zip = createPatient2.work_zip;
+      patient.work_street = createPatient2.work_street;
+      patient.work_suite = createPatient2.work_suite;
+    
     
     try {
 
@@ -132,22 +139,26 @@ export class PatientService {
 
 
   async createPatient3(
-    createPatientDto3: CreatePatientDto3, id:string
+    createPatient3: CreatePatientDto3, id:string
   ): Promise<boolean> {
     
-    const patient = await this.patientRepository.findOneBy({ id });
+   const patient = await this.patientRepository.findOneBy({ id });
+  
+   if(!patient){
+    throw new BadRequestException("Sorry, user does not exist.");
     
-    patient.facultyAppoinment = createPatientDto3.facultyAppoinment;
-    patient.title = createPatientDto3.title;
-    patient.insurancePlan = createPatientDto3.insurancePlan;
-    patient.providerOfficeLocation = createPatientDto3.officeLocation;
-    patient.providerCity = createPatientDto3.city;
-    patient.providerStreet = createPatientDto3.street;
-    patient.providerZip = createPatientDto3.zipCode;
-    patient.providerState = createPatientDto3.state;
-    patient.officeDays = createPatientDto3.officeDays;
-    patient.officeHours = createPatientDto3.officeHours;
-    patient.website = createPatientDto3.website;
+   }
+    patient.home_address = createPatient3.home_address;
+    patient.home_city = createPatient3.home_city;
+    patient.home_state = createPatient3.home_state;
+    patient.home_zip = createPatient3.home_zip;
+    patient.home_street = createPatient3.home_street;
+    patient.home_suite = createPatient3.home_suite;
+    patient.drivingLicense = createPatient3.drivingLicense;
+    patient.preferred_age = createPatient3.preferred_age;
+    patient.preferred_gender = createPatient3.preferred_gender;
+    patient.preferred_insurance = createPatient3.preferred_insurance;
+    patient.allergy = createPatient3.allergy;
 
 
     try {
@@ -276,7 +287,6 @@ export class PatientService {
           firstName: resp.firstName,
           lastName: resp.lastName,
           phoneNumber: resp.phoneNumber,
-          basicEducation: resp.basicEducation,
           image: resp.image,
         };
         return {

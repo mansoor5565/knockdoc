@@ -45,66 +45,66 @@ export class Patient {
   dob: Date;
 
   @Column({ default: null })
-  gender: 15;
+  gender: string;
 
   @Column({ default: null })
-  race: 15;
+  race: string;
 
   @Column({ default: null })
-  mail_address: 500;
+  mail_address: string;
 
   @Column({ default: null })
-  mail_city: 500;
+  mail_city: string;
 
   @Column({ default: null })
-  mail_state: 500;
+  mail_state: string;
 
   @Column({ default: null })
-  mail_zip: 500;
+  mail_zip: string;
 
   @Column({ default: null })
-  mail_street: 500;
+  mail_street: string;
 
   @Column({ default: null })
-  mail_suite: 500;
-
-
-  @Column({ default: null })
-  work_address: 500;
-
-  @Column({ default: null })
-  work_city: 500;
-
-  @Column({ default: null })
-  work_state: 500;
-
-  @Column({ default: null })
-  work_zip: 500;
-
-  @Column({ default: null })
-  work_street: 500;
-
-  @Column({ default: null })
-  work_suite: 500;
+  mail_suite: string;
 
 
   @Column({ default: null })
-  home_address: 500;
+  work_address: string;
 
   @Column({ default: null })
-  home_city: 500;
+  work_city: string;
 
   @Column({ default: null })
-  home_state: 500;
+  work_state: string;
 
   @Column({ default: null })
-  home_zip: 500;
+  work_zip: string;
 
   @Column({ default: null })
-  home_street: 500;
+  work_street: string;
 
   @Column({ default: null })
-  home_suite: 500;
+  work_suite: string;
+
+
+  @Column({ default: null })
+  home_address: string;
+
+  @Column({ default: null })
+  home_city: string;
+
+  @Column({ default: null })
+  home_state: string;
+
+  @Column({ default: null })
+  home_zip: string;
+
+  @Column({ default: null })
+  home_street: string;
+
+  @Column({ default: null })
+  home_suite: string;
 
   @Column({ default: null })
   drivingLicense: string;

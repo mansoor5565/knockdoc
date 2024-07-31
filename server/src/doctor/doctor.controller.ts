@@ -27,6 +27,7 @@ export class DoctorsController {
     //Doctor account creation API
     @Post('/signup')
     async createDoctor(@Body() createDoctorDto: CreateDoctorDto): Promise<any> {
+      
         const { accessToken } = await this.doctorService.createDoctor(createDoctorDto);
         const response = { accessToken, message: 'Your account has been created successfully', status: true };
         return response;

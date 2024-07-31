@@ -25,22 +25,24 @@ export class CreateDoctorDto2 {
 
   @IsString()
   @MaxLength(6)
-  @MinLength(2)
   suffix: string;
 
   @IsString()
   @MaxLength(6)
-  @MinLength(2)
-  boardCertified: string;
+  @MinLength(4)
+  @IsOptional()
+  boardCertified?: string;
 
   @IsString()
-  @MaxLength(6)
+  @MaxLength(20)
   @MinLength(2)
+  @IsOptional()
   hospitalAffiliate: string;
 
   @IsString()
   @MaxLength(80)
   @MinLength(2)
+  @IsOptional()
   hospitalName: string;
 
 }

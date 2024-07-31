@@ -21,28 +21,31 @@ export class CreateDoctorDto3 {
   @IsString()
   @MaxLength(80)
   @MinLength(2)
-  @IsOptional()
   officeLocation?: string;
 
   @IsString()
   @MinLength(2)
   @MaxLength(50)
+  @IsOptional()
   city: string;
 
   @IsString()
   @MinLength(2)
   @MaxLength(50)
+  @IsOptional()
   street: string;
 
   @IsString()
   @MinLength(4)
   @MaxLength(6)
+  @IsOptional()
   zipCode: string;
 
 
   @IsString()
   @MinLength(2)
   @MaxLength(50)
+  @IsOptional()
   state: string;
 
   @IsString()

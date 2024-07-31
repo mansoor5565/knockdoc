@@ -2,8 +2,9 @@ import { Optional } from '@nestjs/common';
 import { IsDate, IsNumber, IsOptional, IsString, Matches, MaxLength, MinLength } from 'class-validator';
 
 export class CreatePatientDto2 {
-  @IsDate()
-  dob: string;
+  
+
+  dob: any;
 
   @IsString()
   @MinLength(2)
