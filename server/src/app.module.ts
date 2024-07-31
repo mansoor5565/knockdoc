@@ -14,10 +14,10 @@ import { PatientModule } from './patient/patient.module';
     CacheModule.register({isGlobal: true}),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '127.0.0.1',
+      host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'testtest',
+      password: '',
       database: 'knockdoc',
       synchronize: true,
       autoLoadEntities: true,
