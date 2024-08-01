@@ -385,4 +385,18 @@ export class DoctorService {
 
     return data;
   }
+
+  async profileDetail(id) {
+    const data = await this.doctorRepository.findOne(
+      {
+        where: { id: id },
+      relations: ["awards", "certifications", "educations", "mbls"],
+    });
+
+    return data;
+  }
+
+
+  
+
 }

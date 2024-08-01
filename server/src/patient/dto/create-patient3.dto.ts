@@ -42,9 +42,6 @@ export class CreatePatientDto3 {
   @IsOptional()
   drivingLicense: string;
 
-
-
-
   @IsString()
   @MaxLength(80)
   @MinLength(2)

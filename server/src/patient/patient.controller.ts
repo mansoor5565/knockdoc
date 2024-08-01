@@ -57,6 +57,17 @@ export class PatientsController {
     }
 
 
+    @UseGuards(AuthGuard())
+    @Get('/')
+    async profileDetail(@Req() req): Promise<any> {
+        const userId = req.user.id; 
+        const data = await this.patientService.profileDetail(userId);
+        const response = { data,message: 'Fetched successfully', status: true };
+        return response;
+    }
+
+
+
     @Put("/forget-password")
     async forgetPassword(
       @Body() forgetPasswordDto: ForgetPasswordDto,

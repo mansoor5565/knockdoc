@@ -65,9 +65,21 @@ export class DoctorsController {
 
 
 
+    @UseGuards(AuthGuard())
     @Get('/list')
     async list(): Promise<any> {
         const data = await this.doctorService.list();
+        const response = { data,message: 'Fetched successfully', status: true };
+        return response;
+    }
+
+
+
+    @UseGuards(AuthGuard())
+    @Get('/')
+    async profileDetail(@Req() req): Promise<any> {
+      const userId = req.user.id; 
+        const data = await this.doctorService.profileDetail(userId);
         const response = { data,message: 'Fetched successfully', status: true };
         return response;
     }

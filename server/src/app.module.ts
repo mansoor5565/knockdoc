@@ -7,17 +7,22 @@ import { MblModule } from './mbl/mbl.module';
 import { SpecialityModule } from './speciality/speciality.module';
 import { LanguageModule } from './language/language.module';
 import { PatientModule } from './patient/patient.module';
-
+import { GeneralModule } from './general/general.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'), // Path to the uploads folder
+    }),
     CacheModule.register({isGlobal: true}),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: '127.0.0.1',
       port: 3306,
       username: 'root',
-      password: '',
+      password: 'testtest',
       database: 'knockdoc',
       synchronize: true,
       autoLoadEntities: true,
@@ -28,7 +33,8 @@ import { PatientModule } from './patient/patient.module';
     MblModule,
     SpecialityModule,
     LanguageModule,
-    PatientModule
+    PatientModule,
+    GeneralModule
   ],
 })
 export class AppModule { }

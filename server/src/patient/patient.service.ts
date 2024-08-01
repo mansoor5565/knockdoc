@@ -330,7 +330,16 @@ export class PatientService {
     const data = await this.patientRepository.find({
       relations: ["awards", "certifications", "educations", "mbls"],
     });
-
     return data;
   }
+
+  async profileDetail(userId) {
+    const data = await this.patientRepository.findOne({
+      where:{id:userId},
+    });
+    return data;
+  }
+
+
+
 }
