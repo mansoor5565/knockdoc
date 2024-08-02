@@ -29,7 +29,7 @@ export class CreateDoctorDto2 {
 
   @IsString()
   @MaxLength(6)
-  @MinLength(4)
+  @MinLength(2)
   @IsOptional()
   boardCertified?: string;
 
