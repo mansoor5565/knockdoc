@@ -259,7 +259,9 @@ export class DoctorService {
     });
     try {
       if (user) {
-        user.password = updateVerifiedPasswordDto.password;
+        const salt = await bcrypt.genSalt();
+        const newhashedPassword = await bcrypt.hash(updateVerifiedPasswordDto.password, salt);
+        user.password = newhashedPassword
 
         user.verificationCode = null;
         await this.doctorRepository.save(user);
