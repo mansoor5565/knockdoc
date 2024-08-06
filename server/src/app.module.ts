@@ -10,6 +10,9 @@ import { PatientModule } from './patient/patient.module';
 import { GeneralModule } from './general/general.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { AppointmentsModule } from './appointments/appointments.module';
+import { TimeslotModule } from './timeslot/timeslot.module';
+import { DoctortimeslotModule } from './doctortimeslot/doctortimeslot.module';
 
 @Module({
   imports: [
@@ -22,7 +25,7 @@ import { join } from 'path';
       host: '127.0.0.1',
       port: 3306,
       username: 'root',
-      password: 'testtest',
+      password: '',
       database: 'knockdoc',
       synchronize: true,
       autoLoadEntities: true,
@@ -34,7 +37,10 @@ import { join } from 'path';
     SpecialityModule,
     LanguageModule,
     PatientModule,
-    GeneralModule
+    GeneralModule,
+    AppointmentsModule,
+    TimeslotModule,
+    DoctortimeslotModule
   ],
 })
 export class AppModule { }

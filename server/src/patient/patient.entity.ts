@@ -3,6 +3,7 @@ import { Certification } from "src/certification/certification.entity";
 import { Education } from "src/education/education.entity";
 import { Language } from "src/language/language.entity";
 import { Mbl } from "src/mbl/mbl.entity";
+import { Appointment } from "src/appointments/entities/appointment.entity";
 import {
   Entity,
   Column,
@@ -133,4 +134,7 @@ export class Patient {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => Appointment, (appointment) => appointment.patient)
+  appointments: Appointment;
 }

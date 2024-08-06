@@ -3,6 +3,7 @@ import { Certification } from "src/certification/certification.entity";
 import { Education } from "src/education/education.entity";
 import { Language } from "src/language/language.entity";
 import { Mbl } from "src/mbl/mbl.entity";
+import { Appointment } from "src/appointments/entities/appointment.entity";
 import {
   Entity,
   Column,
@@ -14,6 +15,7 @@ import {
   JoinTable,
 } from "typeorm";
 //import { Dish } from '../dishes/dish.entity';
+import { DoctorTimeSlot } from '../doctortimeslot/entities/doctortimeslot.entity';
 
 @Entity()
 export class Doctor {
@@ -68,14 +70,17 @@ export class Doctor {
 
   @OneToMany(() => Mbl, (mbl) => mbl.doctor)
   mbls: Mbl;
-  
+
+
+  @OneToMany(() => Appointment, (appointment) => appointment.doctor)
+  appointments: Appointment;
 
 
   @ManyToMany(() => Language, language => language.doctors)
   @JoinTable()
   languages: Language[];
-
-
+  @OneToMany(() => DoctorTimeSlot, doctorTimeSlot => doctorTimeSlot.doctor)
+  DoctorTimeSlots: DoctorTimeSlot[];
   // @OneToMany(() => Language, (language) => language.doctor)
   // languages: Language[];
 

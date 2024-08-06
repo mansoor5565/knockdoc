@@ -1,3 +1,4 @@
+import { DoctorTimeSlot } from './../doctortimeslot/entities/doctortimeslot.entity';
 import { Module } from '@nestjs/common';
 import { DoctorsController } from './doctor.controller';
 import { DoctorService } from './doctor.service';
@@ -14,7 +15,8 @@ import { Education } from 'src/education/education.entity';
 import { Mbl } from 'src/mbl/mbl.entity';
 import { EducationModule } from 'src/education/education.module';
 import { CertificationModule } from 'src/certification/certification.module';
-
+import { TimeslotModule } from 'src/timeslot/timeslot.module';
+import { Timeslot } from 'src/timeslot/entities/timeslot.entity';
 
 @Module({
   imports: [
@@ -23,9 +25,10 @@ import { CertificationModule } from 'src/certification/certification.module';
       secret: 'yourSecretKey', // Replace with your own secret key
       signOptions: { expiresIn: '1000h' }, // Token expiration time
     }),
-    TypeOrmModule.forFeature([Doctor,Language,Certification,Award,Education,Mbl ])],
+    TypeOrmModule.forFeature([Doctor, Language, Certification, Award, Education, Mbl,Timeslot]),
+  ],
   controllers: [DoctorsController],
-  providers: [DoctorService,LanguageService, JwtStrategy]
+  providers: [DoctorService, LanguageService, JwtStrategy]
 })
 
 //DishesService

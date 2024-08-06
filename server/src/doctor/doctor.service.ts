@@ -1,3 +1,4 @@
+
 import {
   BadRequestException,
   Injectable,
@@ -7,6 +8,7 @@ import {
 } from "@nestjs/common";
 import { CreateDoctorDto } from "./dto/create-doctor.dto";
 import { Doctor } from "./doctor.entity";
+import { Inject } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
@@ -25,6 +27,9 @@ import { Certification } from "src/certification/certification.entity";
 import { Education } from "src/education/education.entity";
 import { Mbl } from "src/mbl/mbl.entity";
 import { UpdateUserDto } from "./dto/update-user.dto";
+import { DoctortimeslotService } from '../doctortimeslot/doctortimeslot.service';
+import { DoctorTimeSlot } from './../doctortimeslot/entities/doctortimeslot.entity';
+import { Timeslot } from "src/timeslot/entities/timeslot.entity";
 
 @Injectable()
 export class DoctorService {
@@ -32,13 +37,13 @@ export class DoctorService {
     @InjectRepository(Doctor)
     private readonly doctorRepository: Repository<Doctor>,
     @InjectRepository(Education)
-     private readonly educationRepository: Repository<Education>,
+    private readonly educationRepository: Repository<Education>,
     @InjectRepository(Mbl)
     private readonly mblRepository: Repository<Mbl>,
     @InjectRepository(Certification)
     private readonly certificationRepository: Repository<Certification>,
     private jwtService: JwtService
-  ) {}
+  ) { }
 
   async generateRandomNumber(): Promise<number> {
     return new Promise<number>((resolve, reject) => {
@@ -102,11 +107,11 @@ export class DoctorService {
 
 
   async createDoctor2(
-    createDoctorDto2: CreateDoctorDto2, id:string
+    createDoctorDto2: CreateDoctorDto2, id: string
   ): Promise<boolean> {
-    
+
     const doctor = await this.doctorRepository.findOneBy({ id });
-    
+    console.log(doctor);
     doctor.npiNumber = createDoctorDto2.npiNumber;
     doctor.drivingLicense = createDoctorDto2.drivingLicense;
     doctor.age = createDoctorDto2.age;
@@ -115,7 +120,6 @@ export class DoctorService {
     doctor.boardCertified = createDoctorDto2.boardCertified;
     doctor.hospitalAffiliate = createDoctorDto2.hospitalAffiliate;
     doctor.hospitalName = createDoctorDto2.hospitalName;
-    
     try {
 
       if (doctor) {
@@ -125,7 +129,7 @@ export class DoctorService {
       } else {
         throw new BadRequestException("Sorry, we are not able to update this record");
       }
-      
+
     } catch (error) {
       console.log("error", error);
       throw new InternalServerErrorException(error);
@@ -134,11 +138,11 @@ export class DoctorService {
 
 
   async createDoctor3(
-    createDoctorDto3: CreateDoctorDto3, id:string
+    createDoctorDto3: CreateDoctorDto3, id: string
   ): Promise<boolean> {
-    
+
     const doctor = await this.doctorRepository.findOneBy({ id });
-    
+
     doctor.facultyAppoinment = createDoctorDto3.facultyAppoinment;
     doctor.title = createDoctorDto3.title;
     doctor.insurancePlan = createDoctorDto3.insurancePlan;
@@ -151,9 +155,8 @@ export class DoctorService {
     doctor.officeHours = createDoctorDto3.officeHours;
     doctor.website = createDoctorDto3.website;
 
-
+    
     try {
-
       if (doctor) {
         doctor.verificationCode = null;
         await this.doctorRepository.save(doctor);
@@ -161,7 +164,7 @@ export class DoctorService {
       } else {
         throw new BadRequestException("Sorry, we are not able to update this record");
       }
-      
+
     } catch (error) {
       console.log("error", error);
       throw new InternalServerErrorException(error);
@@ -169,31 +172,31 @@ export class DoctorService {
   }
 
   async createDoctor4(
-    createDoctorDto4: CreateDoctorDto4, id:string
+    createDoctorDto4: CreateDoctorDto4, id: string
   ): Promise<boolean> {
-    
-    console.log("createDoctorDto4",createDoctorDto4);
-    
+
+    console.log("createDoctorDto4", createDoctorDto4);
+
     const doctor = await this.doctorRepository.findOneBy({ id });
 
 
-    if(createDoctorDto4.certifications){
+    if (createDoctorDto4.certifications) {
 
       await this.certificationRepository.delete({ doctor });
-    createDoctorDto4.certifications.forEach(arr=>{
-      const certification: Certification = new Certification();
-      certification.certificateName = arr.certificateName;
-      certification.year = arr.year;
-      certification.attachment = arr.attachment;
-      certification.doctor = doctor;
-      this.certificationRepository.save(certification);
-    })
+      createDoctorDto4.certifications.forEach(arr => {
+        const certification: Certification = new Certification();
+        certification.certificateName = arr.certificateName;
+        certification.year = arr.year;
+        certification.attachment = arr.attachment;
+        certification.doctor = doctor;
+        this.certificationRepository.save(certification);
+      })
 
     }
-    
+
 
     await this.educationRepository.delete({ doctor });
-    createDoctorDto4.education.forEach(arr=>{
+    createDoctorDto4.education.forEach(arr => {
       const education: Education = new Education();
       education.schoolName = arr.schoolName;
       education.educated = arr.educated;
@@ -204,15 +207,15 @@ export class DoctorService {
     })
 
 
-      await this.mblRepository.delete({ doctor });
-      const mbl: Mbl = new Mbl();
-      mbl.country = createDoctorDto4.mbl.country;
-      mbl.state = createDoctorDto4.mbl.state;
-      mbl.number = createDoctorDto4.mbl.number;
-      mbl.npiNumber = createDoctorDto4.mbl.npiNumber;
-      mbl.expiration = createDoctorDto4.mbl.expiration;
-      mbl.doctor = doctor;
-      this.mblRepository.save(mbl);
+    await this.mblRepository.delete({ doctor });
+    const mbl: Mbl = new Mbl();
+    mbl.country = createDoctorDto4.mbl.country;
+    mbl.state = createDoctorDto4.mbl.state;
+    mbl.number = createDoctorDto4.mbl.number;
+    mbl.npiNumber = createDoctorDto4.mbl.npiNumber;
+    mbl.expiration = createDoctorDto4.mbl.expiration;
+    mbl.doctor = doctor;
+    this.mblRepository.save(mbl);
 
     try {
 
@@ -222,7 +225,7 @@ export class DoctorService {
       } else {
         throw new BadRequestException("Sorry, we are not able to update this record");
       }
-      
+
     } catch (error) {
       console.log("error", error);
       throw new InternalServerErrorException(error);
@@ -237,7 +240,7 @@ export class DoctorService {
     });
     try {
       if (user) {
-        const verificationCode =  "0000"; //(await this.generateRandomNumber()).toString();
+        const verificationCode = "0000"; //(await this.generateRandomNumber()).toString();
         user.verificationCode = verificationCode;
         await this.doctorRepository.save(user);
 
@@ -254,7 +257,7 @@ export class DoctorService {
     updateVerifiedPasswordDto: UpdateVerifiedPasswordDto
   ): Promise<Boolean> {
     const user = await this.doctorRepository.findOneBy({
-      email:updateVerifiedPasswordDto.email,
+      email: updateVerifiedPasswordDto.email,
       verificationCode: updateVerifiedPasswordDto.verificationCode,
     });
     try {
@@ -267,10 +270,10 @@ export class DoctorService {
         await this.doctorRepository.save(user);
         return true;
       } else {
-        throw new InternalServerErrorException('Sorry, we are unable to update your password');      
+        throw new InternalServerErrorException('Sorry, we are unable to update your password');
       }
     } catch (error) {
-      throw new InternalServerErrorException('Sorry, we are unable to update your password');      
+      throw new InternalServerErrorException('Sorry, we are unable to update your password');
     }
   }
 
@@ -302,20 +305,20 @@ export class DoctorService {
       id,
     });
 
-    console.log("user",user);
+    console.log("user", user);
     try {
 
-        if (user && (await bcrypt.compare(updateprofilePasswordDto.old_password, user.password))) {
-          const salt = await bcrypt.genSalt();
-          const newhashedPassword = await bcrypt.hash(updateprofilePasswordDto.new_password, salt);
-          user.password = newhashedPassword
-          await this.doctorRepository.save(user);
-          return true;
-        } else {
-          throw new InternalServerErrorException('Sorry, we are unable to update your password');
-        }
+      if (user && (await bcrypt.compare(updateprofilePasswordDto.old_password, user.password))) {
+        const salt = await bcrypt.genSalt();
+        const newhashedPassword = await bcrypt.hash(updateprofilePasswordDto.new_password, salt);
+        user.password = newhashedPassword
+        await this.doctorRepository.save(user);
+        return true;
+      } else {
+        throw new InternalServerErrorException('Sorry, we are unable to update your password');
+      }
     } catch (error) {
-      console.log("error",error);
+      console.log("error", error);
       throw new InternalServerErrorException('Sorry, we are unable to update your password');
     }
   }
@@ -392,13 +395,24 @@ export class DoctorService {
     const data = await this.doctorRepository.findOne(
       {
         where: { id: id },
-      relations: ["awards", "certifications", "educations", "mbls"],
-    });
+        relations: ["awards", "certifications", "educations", "mbls"],
+      });
 
     return data;
   }
-
-
-  
-
+  expandWeekDayRange(range: string): string[] {
+    const weekDaysLong = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const weekDaysShort = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const [startDay, endDay] = range.split('-').map(day => day.trim());
+    const startIndex = weekDaysShort.indexOf(startDay);
+    const endIndex = weekDaysShort.indexOf(endDay);
+    return weekDaysLong.slice(startIndex, endIndex + 1);
+  }
+  expandTimeRange(range: string): string[] {
+    const times = ['9:00', '10:00', '11:00', '12:00', '1:00', '2:00'];
+    const [startTimes, endTimes] = range.split('-').map(day => day.trim());
+    const startIndex = times.indexOf(startTimes);
+    const endIndex = times.indexOf(endTimes);
+    return times.slice(startIndex, endIndex + 1);
+  }
 }
