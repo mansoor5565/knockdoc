@@ -13,6 +13,8 @@ import { Language } from 'src/language/language.entity';
 import { DoctorModule } from 'src/doctor/doctor.module';
 import { Mbl } from 'src/mbl/mbl.entity';
 import { Certification } from 'src/certification/certification.entity';
+import { Timeslot } from 'src/timeslot/entities/timeslot.entity';
+import { TimeslotModule } from 'src/timeslot/timeslot.module';
 
 
 @Module({
@@ -22,7 +24,9 @@ import { Certification } from 'src/certification/certification.entity';
       secret: 'yourSecretKey', // Replace with your own secret key
       signOptions: { expiresIn: '300h' }, // Token expiration time
     }),
-    TypeOrmModule.forFeature([Education,Doctor, Language,Mbl,Certification ])],
+    TypeOrmModule.forFeature([Education,Doctor, Language,Mbl,Certification,Timeslot ]),
+    TimeslotModule,
+  ],
     //Dish
   controllers: [EducationController],
   providers: [EducationService,DoctorService, JwtStrategy]

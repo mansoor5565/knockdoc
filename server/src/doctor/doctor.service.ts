@@ -30,7 +30,7 @@ import { UpdateUserDto } from "./dto/update-user.dto";
 import { DoctortimeslotService } from '../doctortimeslot/doctortimeslot.service';
 import { DoctorTimeSlot } from './../doctortimeslot/entities/doctortimeslot.entity';
 import { Timeslot } from "src/timeslot/entities/timeslot.entity";
-
+import { TimeslotService } from "src/timeslot/timeslot.service";
 @Injectable()
 export class DoctorService {
   constructor(
@@ -42,6 +42,9 @@ export class DoctorService {
     private readonly mblRepository: Repository<Mbl>,
     @InjectRepository(Certification)
     private readonly certificationRepository: Repository<Certification>,
+    @InjectRepository(Timeslot)
+    private readonly timeslotRespository: Repository<Timeslot>,
+    private readonly timeslotService:TimeslotService,
     private jwtService: JwtService
   ) { }
 

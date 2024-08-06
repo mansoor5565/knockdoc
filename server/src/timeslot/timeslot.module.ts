@@ -8,6 +8,6 @@ import { Doctor } from 'src/doctor/doctor.entity';
   imports:[TypeOrmModule.forFeature([Timeslot])],
     controllers: [TimeslotController],
     providers: [TimeslotService],
-    exports:[TimeslotService],
+    exports:[TimeslotService]
 })
 export class TimeslotModule {}

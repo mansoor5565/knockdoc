@@ -15,10 +15,13 @@ import { EducationModule } from 'src/education/education.module';
 import { Education } from 'src/education/education.entity';
 import { Mbl } from 'src/mbl/mbl.entity';
 import { Certification } from 'src/certification/certification.entity';
+import { Timeslot } from 'src/timeslot/entities/timeslot.entity';
+import { TimeslotModule } from 'src/timeslot/timeslot.module';
 
 
 @Module({
   imports: [
+    TimeslotModule,
     DoctorModule,
     EducationModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
@@ -26,7 +29,7 @@ import { Certification } from 'src/certification/certification.entity';
       secret: 'yourSecretKey', // Replace with your own secret key
       signOptions: { expiresIn: '300h' }, // Token expiration time
     }),
-    TypeOrmModule.forFeature([Language,Doctor,Education,Mbl,Certification ])],
+    TypeOrmModule.forFeature([Language,Doctor,Education,Mbl,Certification,Timeslot ])],
     //Dish
   controllers: [LanguageController],
   providers: [LanguageService,DoctorService, JwtStrategy]
